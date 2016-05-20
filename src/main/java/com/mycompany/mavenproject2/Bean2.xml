@@ -14,7 +14,7 @@
 ">
     <context:annotation-config />
     <context:component-scan base-package="com.service" />
-  <jpa:repositories base-package="com.repository"/>
+  <jpa:repositories base-package="com.dao"/>
   <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
     <property name="persistenceUnitName" value="APPOrdinacijaPU" />

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -48,11 +44,11 @@ public class Pregled implements Serializable {
     private String lekovi;
     @JoinColumn(name = "jmbg", referencedColumnName = "jmbg")
     @ManyToOne(optional = false)
-    private Karton jmbg;
+    private Pacijent pacijent;
     @JoinColumn(name = "lekar_id", referencedColumnName = "broj_licence")
     @ManyToOne(optional = false)
-    private Lekar lekarId;
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "pregledId")
+    private Fizijatar fizijatar;
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "pregled")
     private Collection<Terapija> terapijaCollection;
     
     public Pregled() {
@@ -109,23 +105,25 @@ public class Pregled implements Serializable {
         this.lekovi = lekovi;
     }
  
-    public Karton getJmbg() {
-        return jmbg;
-    }
+   
+    @JsonIgnore
+    public Pacijent getPacijent() {
+		return pacijent;
+	}
 
-    public void setJmbg(Karton jmbg) {
-        this.jmbg = jmbg;
-    }
-      
-    public Lekar getLekarId() {
-        return lekarId;
-    }
+	public void setPacijent(Pacijent karton) {
+		this.pacijent = karton;
+	}
+	@JsonIgnore
+	public Fizijatar getFizijatar() {
+		return fizijatar;
+	}
 
-    public void setLekarId(Lekar lekarId) {
-        this.lekarId = lekarId;
-    }
+	public void setFizijatar(Fizijatar fizijatar) {
+		this.fizijatar = fizijatar;
+	}
 
-    @Override
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -134,7 +132,7 @@ public class Pregled implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+       
         if (!(object instanceof Pregled)) {
             return false;
         }
@@ -150,17 +148,13 @@ public class Pregled implements Serializable {
         return "com.entity.Pregled[ id=" + id + " ]";
     }
 
-    /**
-     * @return the terapijaCollection
-     */
-   
+  
+    @JsonIgnore
     public Collection<Terapija> getTerapijaCollection() {
         return terapijaCollection;
     }
 
-    /**
-     * @param terapijaCollection the terapijaCollection to set
-     */
+
     public void setTerapijaCollection(Collection<Terapija> terapijaCollection) {
         this.terapijaCollection = terapijaCollection;
     }

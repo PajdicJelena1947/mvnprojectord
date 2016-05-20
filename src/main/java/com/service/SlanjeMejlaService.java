@@ -1,6 +1,6 @@
 package com.service;
 
-import com.entity.Karton;
+import com.entity.Pacijent;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,7 +23,7 @@ public class SlanjeMejlaService {
 	MimeMessage generateMailMessage;
         
         
-        public  void generateAndSendEmail(Karton karton,String email,String tekst) throws AddressException, MessagingException {
+        public  void generateAndSendEmail(Pacijent karton,String email,String tekst) throws AddressException, MessagingException {
  
 		
 		mailServerProperties = System.getProperties();

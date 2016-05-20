@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.entity;
 
 import java.io.Serializable;
@@ -19,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *Klasa terapija predstavlja entitet tabele terapija
  * @author jelena.pajdic
@@ -33,12 +31,8 @@ public class Terapija implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "ime_pacijenta")
-    private String imePacijenta;
-    @Column(name = "prezime_pacijenta")
-    private String prezimePacijenta;
     @Column(name = "jmbg_pacijeta")
-    private String jmbgPacijeta;
+    private String jmbgPacijenta;
     @Column(name = "minutaza")
     private Integer minutaza;
     @Column(name = "broj_terapija")
@@ -51,13 +45,12 @@ public class Terapija implements Serializable {
     private Date kraj;
     @JoinColumn(name = "pregled_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Pregled pregledId;
+    private Pregled pregled;
     @JoinColumn(name = "tip_id", referencedColumnName = "sifra")
     @ManyToOne
-    private Tip tipId;
-    @JoinColumn(name = "fizioterapeut_id", referencedColumnName = "broj_licence")
-    @ManyToOne
-    private Fizioterapeut fizioterapeutId;
+    private Tip tip;
+    @Column(name = "fizioterapeut_id")
+    private String fizioterapeutId;
 
     public Terapija() {
     }
@@ -66,11 +59,9 @@ public class Terapija implements Serializable {
         this.id = id;
     }
 
-    public Terapija(Integer id, String imePacijenta, String prezimePacijenta, String jmbgPacijeta) {
+    public Terapija(Integer id, String jmbgPacijeta) {
         this.id = id;
-        this.imePacijenta = imePacijenta;
-        this.prezimePacijenta = prezimePacijenta;
-        this.jmbgPacijeta = jmbgPacijeta;
+        this.jmbgPacijenta = jmbgPacijeta;
     }
 
     public Integer getId() {
@@ -81,28 +72,14 @@ public class Terapija implements Serializable {
         this.id = id;
     }
 
-    public String getImePacijenta() {
-        return imePacijenta;
+   
+
+    public String getJmbgPacijenta() {
+        return jmbgPacijenta;
     }
 
-    public void setImePacijenta(String imePacijenta) {
-        this.imePacijenta = imePacijenta;
-    }
-
-    public String getPrezimePacijenta() {
-        return prezimePacijenta;
-    }
-
-    public void setPrezimePacijenta(String prezimePacijenta) {
-        this.prezimePacijenta = prezimePacijenta;
-    }
-
-    public String getJmbgPacijeta() {
-        return jmbgPacijeta;
-    }
-
-    public void setJmbgPacijeta(String jmbgPacijeta) {
-        this.jmbgPacijeta = jmbgPacijeta;
+    public void setJmbgPacijenta(String jmbgPacijeta) {
+        this.jmbgPacijenta = jmbgPacijeta;
     }
 
     public Integer getMinutaza() {
@@ -136,28 +113,29 @@ public class Terapija implements Serializable {
     public void setKraj(Date kraj) {
         this.kraj = kraj;
     }
-
-    public Pregled getPregledId() {
-        return pregledId;
+    
+    @JsonIgnore
+    public Pregled getPregled() {
+        return pregled;
     }
 
-    public void setPregledId(Pregled pregledId) {
-        this.pregledId = pregledId;
+    public void setPregledId(Pregled pregled) {
+        this.pregled = pregled;
     }
 
-    public Tip getTipId() {
-        return tipId;
+    public Tip getTip() {
+        return tip;
     }
 
-    public void setTipId(Tip tipId) {
-        this.tipId = tipId;
+    public void setTip(Tip tip) {
+        this.tip = tip;
     }
 
-    public Fizioterapeut getFizioterapeutId() {
+    public String getFizioterapeutId() {
         return fizioterapeutId;
     }
 
-    public void setFizioterapeutId(Fizioterapeut fizioterapeutId) {
+    public void setFizioterapeutId(String fizioterapeutId) {
         this.fizioterapeutId = fizioterapeutId;
     }
 
@@ -170,7 +148,7 @@ public class Terapija implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+       
         if (!(object instanceof Terapija)) {
             return false;
         }

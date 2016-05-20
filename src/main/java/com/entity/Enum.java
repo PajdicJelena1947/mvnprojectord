@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+
 package com.entity;
 
 /**
  * Enum klasa predstavlja enume za entitete Lekar i Fizioterapeut
  * @author jelena.pajdic
  */
-public enum EnumRola {
+public enum Enum {
     L(Values.L),F(Values.F),K(Values.K);
-    private EnumRola (String val) {
+    private Enum (String val) {
      
      if (!this.name().equals(val))
         throw new IllegalArgumentException("Error");

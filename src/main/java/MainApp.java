@@ -1,13 +1,14 @@
 
 import com.entity.Fizioterapeut;
-import com.entity.Karton;
-import com.entity.Lekar;
+import com.entity.Pacijent;
+import com.entity.Fizijatar;
 import com.entity.Pregled;
 import com.entity.Terapija;
 import com.entity.Tip;
+import com.excepitons.PostojiPregled;
 import com.service.FizioterapeutService;
-import com.service.KartonService;
-import com.service.LekarService;
+import com.service.PacijentService;
+import com.service.FizijatarService;
 import java.sql.Date;
 import java.util.List;
 
@@ -30,20 +31,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class MainApp {
     public static void main(String[] args) throws MessagingException {
-       ApplicationContext context = 
+    	ClassPathXmlApplicationContext context = 
              new ClassPathXmlApplicationContext("Bean2.xml");
        
-       KartonService kService= (KartonService) context.getBean("kartonService");
+       PacijentService kService= (PacijentService) context.getBean("pacijentService");
       
-       LekarService lService = (LekarService) context.getBean("lekarService");
-       FizioterapeutService lfService = (FizioterapeutService) context.getBean("fizioterapeutService");
-       Karton k = kService.vratiPacijenta("2712");
-       System.out.println(k.getAdresa());
-       Lekar lekar = lService.vratiLekara("12345");
-      
-       System.out.println(lekar.getType());
-       
-       System.out.println(k.getType());
-   
-    }
+       FizijatarService lService = (FizijatarService) context.getBean("fizijatarService");
+       FizioterapeutService fService= (FizioterapeutService) context.getBean("fizioterapeutService");
+     List<Pregled> p =kService.sviPreglediPacijenta("2712");
+     for(Pregled pe:p)
+    	 System.out.println(pe.getBolest());
+}
 }

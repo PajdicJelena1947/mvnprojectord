@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.entity;
 
 import java.io.Serializable;
@@ -30,7 +26,7 @@ public class Tip implements Serializable {
     private Integer sifra;
     @Column(name = "naziv")
     private String naziv;
-    @OneToMany(mappedBy = "tipId")
+    @OneToMany(mappedBy = "tip")
     private Collection<Terapija> terapijaCollection;
 
     public Tip() {
@@ -79,7 +75,7 @@ public class Tip implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        
         if (!(object instanceof Tip)) {
             return false;
         }
